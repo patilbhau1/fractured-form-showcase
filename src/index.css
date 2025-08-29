@@ -1,97 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Experimental 3D Artist Portfolio Design System - Awwwards Inspired */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Core Brand Palette - Muted & Artistic */
+    --velvet-beige: 45 20% 62%;           /* #ADA996 */
+    --soft-white: 0 0% 95%;               /* #F2F2F2 */
+    --velvet-smoke: 30 10% 45%;           /* Taupe/Grey */
+    --velvet-deep: 30 15% 25%;            /* Deeper smoke for contrast */
+    --chaos-accent: 15 25% 35%;           /* Experimental accent */
+    
+    /* Semantic Tokens */
+    --background: var(--soft-white);
+    --foreground: var(--velvet-deep);
+    --card: var(--soft-white);
+    --card-foreground: var(--velvet-deep);
+    --primary: var(--velvet-smoke);
+    --primary-foreground: var(--soft-white);
+    --secondary: var(--velvet-beige);
+    --secondary-foreground: var(--velvet-deep);
+    --muted: var(--velvet-beige);
+    --muted-foreground: var(--velvet-smoke);
+    --accent: var(--chaos-accent);
+    --accent-foreground: var(--soft-white);
+    --border: 45 15% 85%;
+    --ring: var(--velvet-smoke);
+    --radius: 0.75rem;
+    
+    /* Experimental Gradients */
+    --gradient-chaos: linear-gradient(135deg, hsl(var(--velvet-beige)), hsl(var(--velvet-smoke)));
+    --gradient-depth: linear-gradient(180deg, hsl(var(--soft-white)), hsl(var(--velvet-beige)));
+    --gradient-experimental: conic-gradient(from 45deg, hsl(var(--velvet-beige)), hsl(var(--velvet-smoke)), hsl(var(--chaos-accent)));
+    
+    /* Motion & Effects */
+    --transition-chaos: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-experimental: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    
+    /* Shadows & Depth */
+    --shadow-artistic: 0 20px 60px -20px hsl(var(--velvet-smoke) / 0.3);
+    --shadow-chaos: 0 0 60px hsl(var(--velvet-beige) / 0.4);
+    --shadow-depth: 0 30px 80px -30px hsl(var(--velvet-deep) / 0.2);
   }
+}
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+@layer base {
+  * {
+    @apply border-border;
   }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+  }
+}
+
+@layer components {
+  /* Experimental Typography */
+  .text-experimental {
+    background: var(--gradient-experimental);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .text-chaos {
+    background: var(--gradient-chaos);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* 3D Transform Effects */
+  .transform-3d {
+    transform-style: preserve-3d;
+  }
+  
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  /* Chaos Reel Animations */
+  .chaos-fragment {
+    transition: var(--transition-chaos);
+    transform-origin: center;
+  }
+  
+  .chaos-fragment:hover {
+    transform: translateZ(40px) rotateX(15deg) rotateY(15deg) scale(1.1);
+    filter: brightness(1.1) contrast(1.05);
+  }
+  
+  /* Gallery Hover Effects */
+  .gallery-item {
+    transition: var(--transition-experimental);
+    transform-origin: center;
+  }
+  
+  .gallery-item:hover {
+    transform: scale(1.05) rotateX(5deg) rotateY(-5deg);
+    filter: saturate(1.2) brightness(1.05);
+  }
+  
+  /* Glitch Effect */
+  .glitch-effect {
+    position: relative;
+  }
+  
+  .glitch-effect::before,
+  .glitch-effect::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: var(--transition-smooth);
+  }
+  
+  .glitch-effect::before {
+    color: hsl(var(--chaos-accent));
+    transform: translateX(-2px);
+  }
+  
+  .glitch-effect::after {
+    color: hsl(var(--velvet-beige));
+    transform: translateX(2px);
+  }
+  
+  .glitch-effect:hover::before,
+  .glitch-effect:hover::after {
+    opacity: 0.7;
+    animation: glitch 0.3s ease-in-out;
+  }
+  
+  /* Wireframe Overlay */
+  .wireframe-overlay {
+    position: relative;
+  }
+  
+  .wireframe-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      linear-gradient(90deg, hsl(var(--velvet-smoke) / 0.1) 1px, transparent 1px),
+      linear-gradient(180deg, hsl(var(--velvet-smoke) / 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0;
+    transition: var(--transition-smooth);
+    pointer-events: none;
+  }
+  
+  .wireframe-overlay:hover::before {
+    opacity: 1;
+  }
+  
+  /* Asymmetrical Grid */
+  .asymmetric-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2rem;
+    align-items: start;
+  }
+  
+  .grid-chaos-1 { grid-column: 1 / 6; grid-row: 1; }
+  .grid-chaos-2 { grid-column: 7 / 13; grid-row: 1; margin-top: 4rem; }
+  .grid-chaos-3 { grid-column: 3 / 9; grid-row: 2; margin-top: -2rem; }
+  .grid-chaos-4 { grid-column: 10 / 13; grid-row: 2; }
+  .grid-chaos-5 { grid-column: 1 / 5; grid-row: 3; margin-top: 6rem; }
+  .grid-chaos-6 { grid-column: 6 / 12; grid-row: 3; margin-top: 2rem; }
+}
+
+@layer utilities {
+  /* Keyframe Animations */
+  @keyframes glitch {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-2px); }
+    40% { transform: translateX(2px); }
+    60% { transform: translateX(-1px); }
+    80% { transform: translateX(1px); }
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-10px) rotate(1deg); }
+    66% { transform: translateY(5px) rotate(-1deg); }
+  }
+  
+  @keyframes chaos-shuffle {
+    0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
+    25% { transform: translateX(-5px) translateY(-3px) rotate(1deg); }
+    50% { transform: translateX(3px) translateY(5px) rotate(-1deg); }
+    75% { transform: translateX(-2px) translateY(-2px) rotate(0.5deg); }
+  }
+  
+  @keyframes wipe-left {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0 0 0 0); }
+  }
+  
+  @keyframes wipe-right {
+    from { clip-path: inset(0 0 0 100%); }
+    to { clip-path: inset(0 0 0 0); }
+  }
+  
+  @keyframes slide-chaos {
+    from { 
+      transform: translateX(-100%) skewX(15deg);
+      opacity: 0;
+    }
+    to { 
+      transform: translateX(0) skewX(0deg);
+      opacity: 1;
+    }
+  }
+  
+  /* Animation Classes */
+  .animate-float { animation: float 6s ease-in-out infinite; }
+  .animate-chaos-shuffle { animation: chaos-shuffle 8s ease-in-out infinite; }
+  .animate-wipe-left { animation: wipe-left 1s ease-out; }
+  .animate-wipe-right { animation: wipe-right 1s ease-out; }
+  .animate-slide-chaos { animation: slide-chaos 0.8s ease-out; }
+  
+  /* Utility Classes */
+  .bg-gradient-chaos { background: var(--gradient-chaos); }
+  .bg-gradient-depth { background: var(--gradient-depth); }
+  .bg-gradient-experimental { background: var(--gradient-experimental); }
+  .shadow-artistic { box-shadow: var(--shadow-artistic); }
+  .shadow-chaos { box-shadow: var(--shadow-chaos); }
+  .shadow-depth { box-shadow: var(--shadow-depth); }
 }
 
 @layer base {

@@ -32,10 +32,6 @@ export default {
 					DEFAULT: 'hsl(var(--secondary))',
 					foreground: 'hsl(var(--secondary-foreground))'
 				},
-				destructive: {
-					DEFAULT: 'hsl(var(--destructive))',
-					foreground: 'hsl(var(--destructive-foreground))'
-				},
 				muted: {
 					DEFAULT: 'hsl(var(--muted))',
 					foreground: 'hsl(var(--muted-foreground))'
@@ -44,24 +40,20 @@ export default {
 					DEFAULT: 'hsl(var(--accent))',
 					foreground: 'hsl(var(--accent-foreground))'
 				},
-				popover: {
-					DEFAULT: 'hsl(var(--popover))',
-					foreground: 'hsl(var(--popover-foreground))'
-				},
 				card: {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
-				}
+				// Artist Portfolio Brand Colors
+				'velvet-beige': 'hsl(var(--velvet-beige))',
+				'soft-white': 'hsl(var(--soft-white))',
+				'velvet-smoke': 'hsl(var(--velvet-smoke))',
+				'velvet-deep': 'hsl(var(--velvet-deep))',
+				'chaos-accent': 'hsl(var(--chaos-accent))',
+			},
+			fontFamily: {
+				'inter': ['Inter', 'sans-serif'],
+				'playfair': ['Playfair Display', 'serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +76,54 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				// Experimental Animations
+				'glitch': {
+					'0%, 100%': { transform: 'translateX(0)' },
+					'20%': { transform: 'translateX(-2px)' },
+					'40%': { transform: 'translateX(2px)' },
+					'60%': { transform: 'translateX(-1px)' },
+					'80%': { transform: 'translateX(1px)' }
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+					'33%': { transform: 'translateY(-10px) rotate(1deg)' },
+					'66%': { transform: 'translateY(5px) rotate(-1deg)' }
+				},
+				'chaos-shuffle': {
+					'0%, 100%': { transform: 'translateX(0) translateY(0) rotate(0deg)' },
+					'25%': { transform: 'translateX(-5px) translateY(-3px) rotate(1deg)' },
+					'50%': { transform: 'translateX(3px) translateY(5px) rotate(-1deg)' },
+					'75%': { transform: 'translateX(-2px) translateY(-2px) rotate(0.5deg)' }
+				},
+				'wipe-left': {
+					from: { clipPath: 'inset(0 100% 0 0)' },
+					to: { clipPath: 'inset(0 0 0 0)' }
+				},
+				'wipe-right': {
+					from: { clipPath: 'inset(0 0 0 100%)' },
+					to: { clipPath: 'inset(0 0 0 0)' }
+				},
+				'slide-chaos': {
+					from: { 
+						transform: 'translateX(-100%) skewX(15deg)',
+						opacity: '0'
+					},
+					to: { 
+						transform: 'translateX(0) skewX(0deg)',
+						opacity: '1'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'glitch': 'glitch 0.3s ease-in-out',
+				'float': 'float 6s ease-in-out infinite',
+				'chaos-shuffle': 'chaos-shuffle 8s ease-in-out infinite',
+				'wipe-left': 'wipe-left 1s ease-out',
+				'wipe-right': 'wipe-right 1s ease-out',
+				'slide-chaos': 'slide-chaos 0.8s ease-out'
 			}
 		}
 	},
