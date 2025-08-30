@@ -38,7 +38,7 @@ const Index = () => {
               Experimental 3D Artist • Digital Sculptor
             </p>
             <div className="flex justify-center space-x-6 text-sm font-inter">
-              <span>© 2024 Nexus Studio</span>
+              <span>© 2024 Dream Render VFX Studios</span>
               <span>•</span>
               <span>All rights reserved</span>
             </div>

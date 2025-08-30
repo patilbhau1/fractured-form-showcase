@@ -46,7 +46,7 @@ export const Gallery = () => {
       <div className="container mx-auto px-6 mb-20">
         <div className="text-center animate-wipe-left">
           <h2 className="font-playfair text-6xl md:text-7xl font-bold mb-8 text-experimental">
-            Selected Works
+            My Works
           </h2>
           <p className="text-xl font-inter text-velvet-smoke max-w-3xl mx-auto leading-relaxed">
             A curated collection of experimental 3D artworks exploring the boundaries 

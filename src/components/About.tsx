@@ -5,11 +5,11 @@ export const About = () => {
 
   const skills = [
     { name: 'Blender', level: 95, category: '3D Modeling' },
-    { name: 'Cinema 4D', level: 90, category: '3D Animation' },
+    { name: 'after effects', level: 90, category: '3D Animation' },
     { name: 'Substance Designer', level: 85, category: 'Texturing' },
-    { name: 'Octane Render', level: 88, category: 'Rendering' },
-    { name: 'Houdini', level: 75, category: 'Procedural' },
-    { name: 'After Effects', level: 80, category: 'Compositing' }
+    { name: 'evee render ', level: 88, category: 'Rendering' },
+    { name: 'gemotery nodes', level: 50, category: 'Procedural' },
+    { name: 'mocha pro ', level: 80, category: 'Compositing' }
   ];
 
   const experience = [
@@ -22,7 +22,7 @@ export const About = () => {
     {
       year: '2022-2023',
       title: 'Senior 3D Designer',
-      company: 'Nexus Creative Agency',
+      company: 'Dream Render VFX Studios',
       description: 'Specializing in architectural visualization and abstract digital sculptures.'
     },
     {
@@ -46,16 +46,8 @@ export const About = () => {
             {/* Portrait Placeholder with Wireframe Effect */}
             <div className="relative mb-12">
               <div className="w-80 h-80 mx-auto relative">
-                <div className="w-full h-full bg-gradient-chaos rounded-2xl shadow-artistic" />
+                <img src="/images/me.jpg" alt="Portrait of the artist" className="w-full h-full object-cover rounded-2xl shadow-artistic" />
                 <div className="absolute inset-0 wireframe-overlay rounded-2xl opacity-30" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-16 h-16 mx-auto mb-4 bg-soft-white/20 rounded-full flex items-center justify-center">
-                      <div className="w-8 h-8 bg-velvet-smoke rounded-full" />
-                    </div>
-                    <p className="text-soft-white/60 font-inter text-sm">Portrait coming soon</p>
-                  </div>
-                </div>
               </div>
             </div>
 

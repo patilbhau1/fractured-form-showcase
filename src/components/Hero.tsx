@@ -1,119 +1,150 @@
-import { useState, useEffect } from 'react';
-import artwork1 from '@/assets/artwork-1.jpg';
-import artwork2 from '@/assets/artwork-2.jpg';
-import artwork3 from '@/assets/artwork-3.jpg';
-import artwork4 from '@/assets/artwork-4.jpg';
-import artwork5 from '@/assets/artwork-5.jpg';
-import artwork6 from '@/assets/artwork-6.jpg';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 
-const artworks = [
-  { id: 1, src: artwork1, title: "Fluid Geometry" },
-  { id: 2, src: artwork2, title: "Impossible Architecture" },
-  { id: 3, src: artwork3, title: "Ethereal Forms" },
-  { id: 4, src: artwork4, title: "Crystal Dynamics" },
-  { id: 5, src: artwork5, title: "Liquid Metal" },
-  { id: 6, src: artwork6, title: "Organic Brutalism" }
+const images = [
+  "/images/animeshader.png",
+  "/images/grass.png",
+  "/images/IMG_20230525_024621.jpg",
+  "/images/microphone.png",
+  "/images/perfum.jpeg",
+  "/images/perfum1.jpeg",
 ];
 
-export const Hero = () => {
-  const [shuffling, setShuffling] = useState(false);
-  const [currentFragments, setCurrentFragments] = useState(artworks);
+const RotatingText = () => {
+  const texts = ["3D Artist", "VFX Creator", "Experimental Designer", "Creative Coder"];
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setShuffling(true);
-      setTimeout(() => {
-        setCurrentFragments(prev => [...prev].sort(() => Math.random() - 0.5));
-        setShuffling(false);
-      }, 800);
-    }, 8000);
-
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % texts.length);
+    }, 2500);
     return () => clearInterval(interval);
-  }, []);
-
-  const handleFragmentHover = () => {
-    if (!shuffling) {
-      setShuffling(true);
-      setTimeout(() => {
-        setCurrentFragments(prev => [...prev].sort(() => Math.random() - 0.5));
-        setShuffling(false);
-      }, 600);
-    }
-  };
+  }, [texts.length]);
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-depth">
-      {/* Background Elements */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="wireframe-overlay w-full h-full" />
-      </div>
-      
-      {/* Main Content */}
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16 animate-slide-chaos">
-          <h1 className="font-playfair text-7xl md:text-9xl font-bold mb-6 text-chaos">
-            <span className="glitch-effect" data-text="NEXUS">NEXUS</span>
+    <div className="mt-6 text-lg text-stone-600 rotating-text h-7">
+      {texts.map((text, index) => (
+        <span key={text} className={index === currentIndex ? 'active' : ''}>
+          {text}
+        </span>
+      ))}
+    </div>
+  );
+};
+
+const CardSlider = () => {
+    const [active, setActive] = useState(Math.floor(images.length / 2));
+    const autoplayId = useRef<NodeJS.Timeout | null>(null);
+    const sliderRef = useRef<HTMLDivElement>(null);
+
+    const applyLayout = useCallback(() => {
+        if (!sliderRef.current) return;
+        const items = Array.from(sliderRef.current.querySelectorAll('.item')) as HTMLElement[];
+        items.forEach((item, index) => {
+            const diff = index - active;
+            let transform = '';
+            let zIndex = items.length - Math.abs(diff);
+            let filter = '';
+            let opacity = 1;
+
+            if (index === active) {
+                transform = `translateX(0) scale(1)`;
+                zIndex = items.length + 1;
+            } else if (index < active) {
+                transform = `translateX(${-140 * Math.abs(diff)}px) scale(${1 - 0.2 * Math.abs(diff)}) perspective(16px) rotateY(1deg)`;
+                filter = 'blur(2px)';
+                opacity = Math.abs(diff) > 2 ? 0 : 0.6;
+            } else {
+                transform = `translateX(${140 * Math.abs(diff)}px) scale(${1 - 0.2 * Math.abs(diff)}) perspective(16px) rotateY(-1deg)`;
+                filter = 'blur(2px)';
+                opacity = Math.abs(diff) > 2 ? 0 : 0.6;
+            }
+
+            item.style.transform = transform;
+            item.style.zIndex = zIndex.toString();
+            item.style.filter = filter;
+            item.style.opacity = opacity.toString();
+        });
+    }, [active]);
+
+    const goNext = useCallback(() => {
+        setActive((prevActive) => (prevActive + 1) % images.length);
+    }, []);
+
+    const goPrev = useCallback(() => {
+        setActive((prevActive) => (prevActive - 1 + images.length) % images.length);
+    }, []);
+
+    const stopAutoplay = useCallback(() => {
+        if (autoplayId.current) {
+            clearInterval(autoplayId.current);
+            autoplayId.current = null;
+        }
+    }, []);
+
+    const startAutoplay = useCallback(() => {
+        if (autoplayId.current) return;
+        autoplayId.current = setInterval(goNext, 1500);
+    }, [goNext]);
+
+
+    useEffect(() => {
+        applyLayout();
+    }, [active, applyLayout]);
+
+    useEffect(() => {
+        startAutoplay();
+        return () => stopAutoplay();
+    }, [startAutoplay, stopAutoplay]);
+
+    const handleInteraction = () => {
+        stopAutoplay();
+        setTimeout(startAutoplay, 5000);
+    };
+
+    const onNext = () => {
+        goNext();
+        handleInteraction();
+    }
+
+    const onPrev = () => {
+        goPrev();
+        handleInteraction();
+    }
+
+    return (
+        <div className="slider" ref={sliderRef} onMouseEnter={stopAutoplay} onMouseLeave={startAutoplay}>
+            <div className="tagline">My Renders</div>
+            {images.map((src, index) => (
+                <div key={index} className="item"><img src={src} alt={`render-${index}`} /></div>
+            ))}
+            <button id="prev" className="nav-btn" onClick={onPrev}>&lt;</button>
+            <button id="next" className="nav-btn" onClick={onNext}>&gt;</button>
+        </div>
+    );
+};
+
+
+export const Hero = () => {
+  return (
+    <div className="flex-grow flex items-center justify-center min-h-screen pt-20">
+      <div className="hero-grid">
+        <CardSlider />
+        <div className="right-content flex flex-col md:pl-40">
+          <h1 className="font-cormorant font-bold text-5xl md:text-6xl text-stone-900 leading-tight">
+            Pravin Patil
           </h1>
-          <p className="text-xl md:text-2xl font-inter text-velvet-smoke max-w-2xl mx-auto leading-relaxed">
-            3D Artist • Digital Sculptor • Experimental Designer
+          <p className="mt-4 text-lg md:text-xl text-stone-700 max-w-xl font-medium">
+            I am Pravin , a passionate 3D Artist & VFX Creator blending technology with artistry — dedicated to turning imagination into reality through stunning renders and experimental designs.
           </p>
-          <div className="w-24 h-1 bg-gradient-chaos mx-auto mt-8 rounded-full" />
-        </div>
-
-        {/* Chaos Reel */}
-        <div className="perspective-1000 relative">
-          <div className="transform-3d">
-            <div className="grid grid-cols-6 gap-4 md:gap-6 max-w-6xl mx-auto">
-              {currentFragments.map((artwork, index) => (
-                <div
-                  key={artwork.id}
-                  className={`
-                    chaos-fragment cursor-pointer relative group
-                    ${shuffling ? 'animate-chaos-shuffle' : ''}
-                    ${index % 2 === 0 ? 'mt-8' : ''}
-                    ${index % 3 === 0 ? 'animate-float' : ''}
-                  `}
-                  onMouseEnter={handleFragmentHover}
-                  style={{
-                    animationDelay: `${index * 0.1}s`,
-                    height: `${200 + (index % 3) * 50}px`
-                  }}
-                >
-                  <div className="relative overflow-hidden rounded-lg shadow-artistic">
-                    <img
-                      src={artwork.src}
-                      alt={artwork.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-velvet-deep/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <div className="absolute bottom-2 left-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      <p className="text-soft-white text-sm font-inter font-medium">
-                        {artwork.title}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  {/* 3D Transform Effect */}
-                  <div className="absolute inset-0 rounded-lg border border-velvet-beige/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                </div>
-              ))}
-            </div>
+          <RotatingText />
+          <div className="mt-8">
+            <a href="#" className="inline-block bg-stone-700 text-white py-4 px-10 rounded-full text-lg font-medium hover:bg-stone-800 transition-all duration-300 transform hover:scale-105 shadow-lg">
+              Explore Gallery
+            </a>
           </div>
-        </div>
-
-        {/* Call to Action */}
-        <div className="text-center mt-16 animate-wipe-left">
-          <button className="group relative px-8 py-4 font-inter font-medium text-primary-foreground bg-primary rounded-full shadow-chaos hover:shadow-depth transition-all duration-500 hover:scale-105">
-            <span className="relative z-10">Explore Gallery</span>
-            <div className="absolute inset-0 bg-gradient-chaos rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          </button>
+          <p className="mt-6 text-stone-500 italic">Trusted by creators & brands to deliver stunning visuals</p>
         </div>
       </div>
-
-      {/* Ambient Elements */}
-      <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-chaos-accent rounded-full animate-float opacity-60" />
-      <div className="absolute top-3/4 right-1/3 w-1 h-1 bg-velvet-beige rounded-full animate-float opacity-40" style={{ animationDelay: '2s' }} />
-      <div className="absolute bottom-1/4 left-1/2 w-3 h-3 bg-velvet-smoke/30 rounded-full animate-float" style={{ animationDelay: '4s' }} />
-    </section>
+    </div>
   );
 };

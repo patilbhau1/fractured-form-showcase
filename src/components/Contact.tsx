@@ -153,7 +153,7 @@ export const Contact = () => {
                     href="mailto:hello@nexus3d.com" 
                     className="font-inter text-xl text-foreground hover:text-chaos-accent transition-colors duration-300 group-hover:underline"
                   >
-                    pravinpatil90939@gmial.com
+                    hello@dreamrenderstudios.com
                   </a>
                 </div>
                 
