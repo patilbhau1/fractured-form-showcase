@@ -1,72 +1,45 @@
-import { useState } from 'react';
-import artwork1 from '@/assets/artwork-1.jpg';
-import artwork2 from '@/assets/artwork-2.jpg';
-import artwork3 from '@/assets/artwork-3.jpg';
-import artwork4 from '@/assets/artwork-4.jpg';
-import artwork5 from '@/assets/artwork-5.jpg';
-import artwork6 from '@/assets/artwork-6.jpg';
+import BoundlessVideo from "./BoundlessVideo";
 
-const portfolioItems = [
+const brandVideos = [
   {
-    id: 1,
-    src: artwork1,
-    title: "Fluid Geometry",
-    category: "Abstract Sculpture",
-    year: "2024",
-    description: "Exploring the intersection of organic fluidity and geometric precision through metallic surfaces and crystalline structures."
+    src: "/videos/Brand_collab_beear.mp4",
+    title: "Fruit Beer Ad",
+    description: "A vibrant and refreshing animation showcasing a new fruit beer, emphasizing its natural ingredients and crisp taste.",
+    shadow: "#C97B3C40",
   },
   {
-    id: 2,
-    src: artwork2,
-    title: "Impossible Architecture",
-    category: "Architectural Visualization",
-    year: "2024",
-    description: "Futuristic architectural concepts that challenge gravity and conventional building principles with holographic materials."
+    src: "/videos/Explore the magic of Moon Watch _ Commercial _ Product commercial.mp4",
+    title: "Moon Watch Commercial",
+    description: "An elegant commercial highlighting the intricate design and celestial inspiration of the Moon Watch, blending luxury with cosmic wonder.",
+    shadow: "#C9C9C933",
   },
   {
-    id: 3,
-    src: artwork3,
-    title: "Ethereal Forms",
-    category: "Digital Sculpture",
-    year: "2023",
-    description: "Interwoven ribbons of marble and glass creating elegant compositions between curves and sharp angles."
+    src: "/videos/ssvid.net--Lipstick-Cosmetics-Product-Animation-blender_v720P.mp4",
+    title: "Lipstick Animation",
+    description: "A sleek and sophisticated product animation for a new line of lipsticks, focusing on rich colors and smooth application.",
+    shadow: "#D67B7B40",
   },
   {
-    id: 4,
-    src: artwork4,
-    title: "Crystal Dynamics",
-    category: "Generative Art",
-    year: "2024",
-    description: "Prismatic crystalline formations emerging from organic bases, exploring light refraction and geometric fractals."
+    src: "/videos/ssvid.net--buds-product-visualization-3d-animation-blender_1080p.mp4",
+    title: "Earbuds Visualization",
+    description: "A detailed 3D visualization of cutting-edge earbuds, showcasing their ergonomic design, sound quality, and advanced features.",
+    shadow: "#6BAE7540",
   },
   {
-    id: 5,
-    src: artwork5,
-    title: "Liquid Metal",
-    category: "Motion Graphics",
-    year: "2023",
-    description: "Kinetic energy captured in liquid metal sculptures, showcasing surface tension and fluid dynamics."
+    src: "/videos/ssvid.net--coffee-drink-coffee-drink-coffee-blender_v720P.mp4",
+    title: "Coffee Drink Animation",
+    description: "An inviting animation for a coffee drink, capturing the warmth and aroma of freshly brewed coffee with a modern twist.",
+    shadow: "#8B5A3C40",
   },
   {
-    id: 6,
-    src: artwork6,
-    title: "Organic Brutalism",
-    category: "Conceptual Design",
-    year: "2024",
-    description: "The marriage of brutalist architecture with bio-morphic elements, creating monumental yet organic compositions."
-  }
+    src: "/videos/naturals_ice_cream_ad.mp4",
+    title: "Naturals Ice Cream Ad",
+    description: "A delightful and playful advertisement for Naturals ice cream, emphasizing its natural flavors and creamy texture.",
+    shadow: "#4A7A3D40",
+  },
 ];
 
 export const Gallery = () => {
-  const [selectedItem, setSelectedItem] = useState<typeof portfolioItems[0] | null>(null);
-  const [filter, setFilter] = useState('All');
-
-  const categories = ['All', ...new Set(portfolioItems.map(item => item.category))];
-
-  const filteredItems = filter === 'All' 
-    ? portfolioItems 
-    : portfolioItems.filter(item => item.category === filter);
-
   return (
     <section className="py-32 bg-background relative overflow-hidden">
       {/* Section Header */}
@@ -80,128 +53,71 @@ export const Gallery = () => {
             between digital and physical, chaos and order, emotion and technology.
           </p>
         </div>
-
-        {/* Filter Navigation */}
-        <div className="flex flex-wrap justify-center gap-4 mt-16 mb-16">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setFilter(category)}
-              className={`
-                px-6 py-3 font-inter font-medium rounded-full transition-all duration-500
-                ${filter === category 
-                  ? 'bg-primary text-primary-foreground shadow-artistic' 
-                  : 'bg-muted text-muted-foreground hover:bg-secondary hover:text-secondary-foreground hover:shadow-chaos'
-                }
-              `}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
       </div>
 
-      {/* Asymmetrical Grid Gallery */}
-      <div className="container mx-auto px-6">
-        <div className="asymmetric-grid">
-          {filteredItems.map((item, index) => (
-            <div
-              key={item.id}
-              className={`
-                gallery-item cursor-pointer group relative
-                grid-chaos-${(index % 6) + 1}
-                animate-wipe-right
-              `}
-              style={{ animationDelay: `${index * 0.1}s` }}
-              onClick={() => setSelectedItem(item)}
-            >
-              <div className="relative overflow-hidden rounded-xl shadow-artistic">
-                <img
-                  src={item.src}
-                  alt={item.title}
-                  className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110"
-                />
-                
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-velvet-deep/80 via-velvet-smoke/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <h3 className="font-playfair text-2xl font-bold text-soft-white mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="font-inter text-velvet-beige mb-1">
-                      {item.category} • {item.year}
-                    </p>
-                    <p className="font-inter text-sm text-soft-white/80 line-clamp-2">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Glitch Border Effect */}
-                <div className="absolute inset-0 border-2 border-chaos-accent rounded-xl opacity-0 group-hover:opacity-60 transition-opacity duration-300 animate-glitch" />
-              </div>
-
-              {/* Floating Category Tag */}
-              <div className="absolute top-4 right-4 bg-velvet-smoke/90 backdrop-blur-sm text-soft-white px-3 py-1 rounded-full text-sm font-inter font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                {item.year}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Modal for Selected Item */}
-      {selectedItem && (
-        <div 
-          className="fixed inset-0 bg-velvet-deep/90 backdrop-blur-lg z-50 flex items-center justify-center p-6"
-          onClick={() => setSelectedItem(null)}
-        >
-          <div 
-            className="relative max-w-4xl w-full bg-card rounded-2xl shadow-depth overflow-hidden animate-scale-in"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="grid md:grid-cols-2 gap-0">
-              {/* Image */}
-              <div className="relative">
-                <img
-                  src={selectedItem.src}
-                  alt={selectedItem.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              
-              {/* Details */}
-              <div className="p-8 md:p-12">
-                <div className="mb-6">
-                  <h3 className="font-playfair text-4xl font-bold text-chaos mb-4">
-                    {selectedItem.title}
-                  </h3>
-                  <div className="flex items-center gap-4 text-velvet-smoke font-inter mb-6">
-                    <span>{selectedItem.category}</span>
-                    <span>•</span>
-                    <span>{selectedItem.year}</span>
-                  </div>
-                </div>
-                
-                <p className="font-inter text-lg leading-relaxed text-foreground mb-8">
-                  {selectedItem.description}
-                </p>
-                
-                <button
-                  onClick={() => setSelectedItem(null)}
-                  className="px-6 py-3 bg-primary text-primary-foreground font-inter font-medium rounded-lg hover:bg-gradient-chaos transition-all duration-300"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
+      {/* Project 1: VFX Breakdown */}
+      <div className="container mx-auto px-6 mb-20">
+        <h3 className="font-playfair text-4xl font-bold mb-8 text-chaos">VFX Breakdown</h3>
+        <div className="grid md:grid-cols-2 gap-8">
+          <div>
+            <h4 className="font-inter text-2xl font-bold mb-4">Concept</h4>
+            <BoundlessVideo src="/videos/minicar_vfx _raw.mp4" shadow="#A0A0A040" className="w-full rounded-lg shadow-lg" />
+          </div>
+          <div>
+            <h4 className="font-inter text-2xl font-bold mb-4">Final</h4>
+            <BoundlessVideo src="/videos/Minicar_vfx_final.mp4" shadow="#A0A0A040" className="w-full rounded-lg shadow-lg" />
           </div>
         </div>
-      )}
+      </div>
 
-      {/* Background Ambient Elements */}
-      <div className="absolute top-20 right-20 w-1 h-32 bg-gradient-to-b from-velvet-beige/20 to-transparent rotate-45" />
-      <div className="absolute bottom-40 left-20 w-24 h-1 bg-gradient-to-r from-velvet-smoke/20 to-transparent" />
+      {/* Project 2: Book Brand Promotion */}
+      <div className="container mx-auto px-6 mb-20">
+        <h3 className="font-playfair text-4xl font-bold mb-8 text-chaos">Book Brand Promotion</h3>
+        <div className="grid md:grid-cols-2 gap-8">
+          <div>
+            <h4 className="font-inter text-2xl font-bold mb-4">Concept</h4>
+            <BoundlessVideo src="/videos/Concept_for_book_aniamtion_raw.mp4" shadow="#A0A0A040" className="w-full rounded-lg shadow-lg" />
+          </div>
+          <div>
+            <h4 className="font-inter text-2xl font-bold mb-4">Final</h4>
+            <BoundlessVideo src="/videos/Fibal_book animation.mp4" shadow="#A0A0A040" className="w-full rounded-lg shadow-lg" />
+          </div>
+        </div>
+      </div>
+
+      {/* Separator */}
+      <div className="container mx-auto px-6 my-20">
+        <div className="w-full h-1 bg-gradient-to-r from-velvet-beige/20 via-velvet-smoke/50 to-transparent rounded-full" />
+      </div>
+
+      {/* Animated Reels for Brands */}
+      <div className="container mx-auto px-6 mt-32 mb-20">
+        <div className="text-center animate-wipe-left">
+          <h2 className="font-playfair text-6xl md:text-7xl font-bold mb-8 text-experimental">
+            Animated Reels for Brands
+          </h2>
+        </div>
+        {brandVideos.map((video, index) => (
+          <div key={index} className={`grid md:grid-cols-2 gap-8 items-center mb-16 ${index % 2 === 0 ? '' : 'md:grid-flow-col-dense'}`}>
+            <div className={`animate-wipe-right ${index % 2 === 0 ? '' : 'md:col-start-2'}`}>
+              <BoundlessVideo src={video.src} shadow={video.shadow} className="w-full h-full object-cover" />
+            </div>
+            <div className={`animate-wipe-left ${index % 2 === 0 ? '' : 'md:col-start-1'}`}>
+              <h3 className="font-playfair text-4xl font-bold mb-4 text-chaos">
+                {video.title}
+              </h3>
+              <p className="font-inter text-xl text-velvet-smoke leading-relaxed">
+                {video.description}
+              </p>
+            </div>
+          </div>
+        ))}
+        <div className="text-center mt-8">
+          <a href="#contact" className="px-8 py-4 bg-primary text-primary-foreground font-inter font-medium rounded-lg hover:bg-gradient-chaos transition-all duration-300">
+            Explore More
+          </a>
+        </div>
+      </div>
     </section>
   );
 };

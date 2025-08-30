@@ -66,20 +66,15 @@ export const About = () => {
               
               <div className="space-y-6 text-lg font-inter leading-relaxed text-foreground max-w-2xl">
                 <p>
-                  I'm a digital sculptor exploring the liminal space between chaos and order, 
-                  where mathematical precision meets organic fluidity. My work investigates 
-                  how technology can amplify human emotion and create new forms of beauty.
+                  I'm a passionate 3D artist and VFX creator, specializing in Blender and After Effects. My work focuses on crafting immersive visuals and storytelling through motion. Over the years, I've created multiple projects and continuously pushed myself to deliver high-quality visuals. Now, I'm excited to take my creativity further by collaborating on short films and larger-scale productions where my skills can bring unique ideas to life.
                 </p>
                 
                 <p>
-                  With over 6 years of experience in 3D art and design, I specialize in 
-                  creating immersive digital experiences that challenge perception and 
-                  push the boundaries of what's possible in virtual space.
+                  Beyond art, I'm also a coder and innovator. The very website you’re exploring was built by me, and I’ve developed AI-driven projects with IoT integration. I’m also the founder of SeeBySound.in, where I combine creativity and technology to design impactful solutions. My goal is to blend art and code to create experiences that are not only visually stunning but also smart and functional.
                 </p>
                 
                 <p className="text-velvet-smoke">
-                  Based in the intersection of art and technology, crafting tomorrow's 
-                  visual language today.
+                  
                 </p>
               </div>
             </div>

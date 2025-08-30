@@ -30,28 +30,13 @@ export const Contact = () => {
   const socialLinks = [
     {
       name: 'Instagram',
-      url: '#',
-      handle: '@nexus.3d'
-    },
-    {
-      name: 'Behance',
-      url: '#',
-      handle: 'nexus-portfolio'
-    },
-    {
-      name: 'Twitter',
-      url: '#',
-      handle: '@nexus3dart'
-    },
-    {
-      name: 'LinkedIn',
-      url: '#',
-      handle: 'nexus-3d-artist'
+      url: 'https://www.instagram.com/3d_artist.pravin/',
+      handle: '@3d_artist.pravin'
     }
   ];
 
   return (
-    <section className="py-32 bg-background relative overflow-hidden">
+    <section id="contact" className="py-32 bg-background relative overflow-hidden">
       <div className="container mx-auto px-6">
         
         {/* Header */}
@@ -84,7 +69,7 @@ export const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-6 py-4 bg-muted border border-border rounded-lg font-inter focus:outline-none focus:ring-2 focus:ring-chaos-accent focus:border-transparent transition-all duration-300"
+                  className="w-full px-6 py-4 bg-muted border border-border rounded-lg font-inter focus:outline-none focus:ring-2 focus:ring-chaos-accent focus:border-transparent transition-all duration-300 placeholder:text-charcoal"
                   placeholder="Your name"
                 />
               </div>
@@ -103,7 +88,7 @@ export const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-6 py-4 bg-muted border border-border rounded-lg font-inter focus:outline-none focus:ring-2 focus:ring-chaos-accent focus:border-transparent transition-all duration-300"
+                  className="w-full px-6 py-4 bg-muted border border-border rounded-lg font-inter focus:outline-none focus:ring-2 focus:ring-chaos-accent focus:border-transparent transition-all duration-300 placeholder:text-charcoal"
                   placeholder="your@email.com"
                 />
               </div>
@@ -122,7 +107,7 @@ export const Contact = () => {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-6 py-4 bg-muted border border-border rounded-lg font-inter focus:outline-none focus:ring-2 focus:ring-chaos-accent focus:border-transparent transition-all duration-300 resize-none"
+                  className="w-full px-6 py-4 bg-muted border border-border rounded-lg font-inter focus:outline-none focus:ring-2 focus:ring-chaos-accent focus:border-transparent transition-all duration-300 resize-none placeholder:text-charcoal"
                   placeholder="Tell me about your project..."
                 />
               </div>
@@ -168,7 +153,7 @@ export const Contact = () => {
                     href="mailto:hello@nexus3d.com" 
                     className="font-inter text-xl text-foreground hover:text-chaos-accent transition-colors duration-300 group-hover:underline"
                   >
-                    hello@nexus3d.com
+                    pravinpatil90939@gmial.com
                   </a>
                 </div>
                 
@@ -180,7 +165,7 @@ export const Contact = () => {
                     href="tel:+1234567890" 
                     className="font-inter text-xl text-foreground hover:text-chaos-accent transition-colors duration-300 group-hover:underline"
                   >
-                    +1 (234) 567-8900
+                    7506750982
                   </a>
                 </div>
               </div>

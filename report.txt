@@ -1,0 +1,155 @@
+Project Report
+
+1. What we did:
+   - Cloned the `fractured-form-showcase` repository.
+   - Installed dependencies using `npm`.
+   - Removed all instances of "lovable" from the project (dependencies, meta tags, README, favicon).
+   - Replaced the favicon with a generic globe icon.
+   - Updated the color palette by adding `muted-green` and `muted-blue` to `tailwind.config.ts`.
+   - Changed the placeholder text color in the contact form to `charcoal` (`#36454F`) for better visibility.
+   - Removed social media links other than Instagram from the contact section.
+   - Completely revamped the "Selected Works" section to showcase video projects.
+   - Added a new "Animated Reels for Brands" section with video showcases.
+   - Moved local video files to the `public/videos` directory.
+   - Implemented a zig-zag layout for videos and descriptions in the "Animated Reels for Brands" section.
+   - Removed conflicting hover overlays that prevented videos from playing.
+   - Removed the "cookie" video as per user's request.
+   - Renamed a video file (`i made an ad for Naturals...`) to `naturals_ice_cream_ad.mp4` to resolve playback issues.
+   - Implemented a `BoundlessVideo` component to create subtle, themed ambient shadows for videos, adjusting `boxShadow` properties for a diffused effect.
+
+2. What is our aim:
+   - To enhance the visual appeal and user experience of the "fractured-form-showcase" project.
+   - To customize the project according to the user's specific design and content requirements.
+   - To ensure all functionalities (like video playback) work correctly and are aesthetically pleasing.
+
+3. What we are currently working on:
+   - Refining the ambient shadow effect for videos in the "Animated Reels for Brands" section to achieve a "boundless" look, similar to YouTube's ambient mode. We are experimenting with `boxShadow` values to get the desired diffused glow.
+
+4. Future updates (based on current trajectory and potential next steps):
+   - Further refinement of the ambient shadow effect if the current changes are not satisfactory.
+   - Adding specific descriptions for the "VFX Breakdown" and "Book Brand Promotion" videos in the "Selected Works" section.
+   - Implementing any other design or content changes the user might request.
+   - Ensuring the project is fully optimized for deployment (e.g., Vercel).
+
+5. Technologies Used:
+   - Vite
+   - React
+   - TypeScript
+   - Tailwind CSS
+   - Shadcn/ui
+
+6. Key Dependencies:
+   - `@hookform/resolvers`
+   - `@radix-ui/*` (various Radix UI components)
+   - `@tanstack/react-query`
+   - `class-variance-authority`
+   - `clsx`
+   - `cmdk`
+   - `date-fns`
+   - `embla-carousel-react`
+   - `input-otp`
+   - `lucide-react`
+   - `next-themes`
+   - `react`
+   - `react-day-picker`
+   - `react-dom`
+   - `react-hook-form`
+   - `react-resizable-panels`
+   - `react-router-dom`
+   - `recharts`
+   - `sonner`
+   - `tailwind-merge`
+   - `tailwindcss-animate`
+   - `vaul`
+   - `zod`
+   - `@eslint/js`
+   - `@tailwindcss/typography`
+   - `@types/node`
+   - `@types/react`
+   - `@types/react-dom`
+   - `@vitejs/plugin-react-swc`
+   - `autoprefixer`
+   - `eslint`
+   - `eslint-plugin-react-hooks`
+   - `eslint-plugin-react-refresh`
+   - `globals`
+   - `postcss`
+   - `tailwindcss`
+   - `typescript`
+   - `typescript-eslint`
+   - `vite`
+
+7. Sample Code Blocks for Important Sections:
+
+   `BoundlessVideo.tsx` component:
+   ```typescript
+   import React from 'react';
+
+   type Props = React.VideoHTMLAttributes<HTMLVideoElement> & {
+     src: string;
+     shadow: string; // pass a hex with alpha
+   };
+
+   export default function BoundlessVideo({ src, shadow, ...rest }: Props) {
+     return (
+       <div
+         className="boundless"
+         style={{
+           boxShadow: `0 0 100px 30px ${shadow}`,
+           borderRadius: "18px"
+         }}
+       >
+         <video className="vid" src={src} playsInline controls {...rest} />
+       </div>
+     );
+   }
+   ```
+
+   `Gallery.tsx` (Animated Reels for Brands section - relevant part):
+   ```typescript
+   // ... (other imports and code)
+
+   const brandVideos = [
+     {
+       src: "/videos/Brand_collab_beear.mp4",
+       title: "Fruit Beer Ad",
+       description: "A vibrant and refreshing animation...",
+       shadow: "#C97B3C40",
+     },
+     // ... (other video objects)
+   ];
+
+   export const Gallery = () => {
+     return (
+       // ... (other JSX)
+       <div className="container mx-auto px-6 mb-20">
+         <div className="text-center animate-wipe-left">
+           <h2 className="font-playfair text-6xl md:text-7xl font-bold mb-8 text-experimental">
+             Animated Reels for Brands
+           </h2>
+         </div>
+         {brandVideos.map((video, index) => (
+           <div key={index} className={`grid md:grid-cols-2 gap-8 items-center mb-16 ${index % 2 === 0 ? '' : 'md:grid-flow-col-dense'}`}>
+             <div className={`animate-wipe-right ${index % 2 === 0 ? '' : 'md:col-start-2'} bg-muted p-4 rounded-lg`}>
+               <BoundlessVideo src={video.src} shadow={video.shadow} className="w-full h-full object-cover" />
+             </div>
+             <div className={`animate-wipe-left ${index % 2 === 0 ? '' : 'md:col-start-1'}`}>
+               <h3 className="font-playfair text-4xl font-bold mb-4 text-chaos">
+                 {video.title}
+               </h3>
+               <p className="font-inter text-xl text-velvet-smoke leading-relaxed">
+                 {video.description}
+               </p>
+             </div>
+           </div>
+         ))}
+         <div className="text-center mt-8">
+           <a href="#contact" className="px-8 py-4 bg-primary text-primary-foreground font-inter font-medium rounded-lg hover:bg-gradient-chaos transition-all duration-300">
+             Explore More
+           </a>
+         </div>
+       </div>
+       // ... (rest of JSX)
+     );
+   };
+   ```

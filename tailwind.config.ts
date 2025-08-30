@@ -50,6 +50,9 @@ export default {
 				'velvet-smoke': 'hsl(var(--velvet-smoke))',
 				'velvet-deep': 'hsl(var(--velvet-deep))',
 				'chaos-accent': 'hsl(var(--chaos-accent))',
+				'muted-green': '#81C784',
+				'muted-blue': '#607D8B',
+				'charcoal': '#36454F',
 			},
 			fontFamily: {
 				'inter': ['Inter', 'sans-serif'],
